@@ -24,11 +24,13 @@ public class JwtUtil {
 
     //private final String secret_key = "mysecretkey";
 
-    String secret_key = "application0very0secure02560bit0secret"; // Make sure this is at least 32 characters
+/*
+    String secret_key = "12345678901234567890123456789012"; // Make sure this is at least 32 characters
     Key key = Keys.hmacShaKeyFor(secret_key.getBytes(StandardCharsets.UTF_8));
+*/
 
     // Generate a secure key for HS256
-    //private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     private long accessTokenValidity = 60*60*1000;
 
@@ -38,7 +40,7 @@ public class JwtUtil {
     private final String TOKEN_PREFIX = "Bearer ";
 
     public JwtUtil(){
-        this.jwtParser = Jwts.parser().setSigningKey(secret_key);
+        this.jwtParser = Jwts.parser().setSigningKey(key);
     }
 
     public String createToken(User user) {
